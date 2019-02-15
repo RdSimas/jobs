@@ -33,6 +33,13 @@ public class SessaoVotacao implements Serializable {
 	@Column(name = "fim")
 	private LocalDateTime fim;
 
+	public SessaoVotacao() {
+	}
+
+	public SessaoVotacao(Long id) {
+		this.id = id;
+	}
+
 	public Long getId() {
 		return id;
 	}

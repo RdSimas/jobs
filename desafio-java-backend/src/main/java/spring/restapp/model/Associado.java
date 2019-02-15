@@ -26,6 +26,13 @@ public class Associado implements Serializable {
 	@Column(name = "senha")
 	private String senha;
 
+	public Associado() {
+	}
+
+	public Associado(Long id) {
+		this.id = id;
+	}
+
 	public Long getId() {
 		return id;
 	}
