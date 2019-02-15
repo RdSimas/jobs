@@ -46,7 +46,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		
+
 		<!-- VERSIONAMENTO E CONTROLE DO BANCO DE DADOS -->
 		<dependency>
 			<groupId>org.flywaydb</groupId>

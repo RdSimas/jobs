@@ -22,6 +22,13 @@ public class Pauta implements Serializable {
 	
 	@Column(name = "descricao")
 	private String descricao;
+	
+	public Pauta() {
+	}
+	
+	public Pauta(Long id) {
+		this.id = id;
+	}
 
 	public Long getId() {
 		return id;
