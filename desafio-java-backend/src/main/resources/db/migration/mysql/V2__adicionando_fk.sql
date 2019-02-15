@@ -1,0 +1,3 @@
+ALTER TABLE `votacao_app`.`voto` ADD CONSTRAINT `fk_voto_associado` FOREIGN KEY (`id_associado`) REFERENCES `votacao_app`.`associado` (`id_associado`);
+ALTER TABLE `votacao_app`.`voto` ADD CONSTRAINT `fk_voto_sessao` FOREIGN KEY (`id_sessao_votacao`) REFERENCES `votacao_app`.`sessao_votacao` (`id_sessao_votacao`);
+ALTER TABLE `votacao_app`.`sessao_votacao` ADD CONSTRAINT `fk_sessao_pauta` FOREIGN KEY (`id_pauta`) REFERENCES `votacao_app`.`pauta` (`id_pauta`);
