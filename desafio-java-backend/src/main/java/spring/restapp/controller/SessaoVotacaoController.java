@@ -12,30 +12,29 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import spring.restapp.Response.Response;
-import spring.restapp.dto.PersistirPautaDTO;
-import spring.restapp.model.Pauta;
-import spring.restapp.service.PautaService;
-
+import spring.restapp.dto.PersistirSessaoVotacaoDTO;
+import spring.restapp.model.SessaoVotacao;
+import spring.restapp.service.SessaoVotacaoService;
 
 @RestController
-@RequestMapping("/pauta")
-public class PautaController {
+@RequestMapping("/sessaoVotacao")
+public class SessaoVotacaoController {
 	
 	@Autowired
-	private PautaService pautaService;
+	private SessaoVotacaoService sessaoVotacaoService;
 	
 	@ResponseBody
 	@PostMapping(path = "/persistir", produces = "application/json")
-	public ResponseEntity<Response<Pauta>> persistir(@Valid @RequestBody PersistirPautaDTO pautaDto, BindingResult result) {
-		Response<Pauta> response = new Response<>();
+	public ResponseEntity<Response<SessaoVotacao>> persistir(@Valid @RequestBody PersistirSessaoVotacaoDTO sessaoVotacaoDto, BindingResult result) {
+		Response<SessaoVotacao> response = new Response<>();
 		
 		if (result.hasErrors()) {
 			result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
 			return ResponseEntity.badRequest().body(response);
 		}
 		
-		Pauta pauta = pautaService.persistirPauta(pautaDto.toPauta());
-		response.setData(pauta);
+		SessaoVotacao sessaoVotacao = sessaoVotacaoService.persistirSessaoVotacao(sessaoVotacaoDto.toSessaoVotacao());
+		response.setData(sessaoVotacao);
 		
 		return ResponseEntity.ok(response);
 	}
