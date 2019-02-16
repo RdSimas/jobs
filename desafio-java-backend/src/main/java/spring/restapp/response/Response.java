@@ -1,4 +1,4 @@
-package spring.restapp.Response;
+package spring.restapp.response;
 
 import java.io.Serializable;
 import java.util.ArrayList;

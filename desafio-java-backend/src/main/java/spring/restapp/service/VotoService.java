@@ -2,8 +2,8 @@ package spring.restapp.service;
 
 import java.util.List;
 
-import spring.restapp.Response.Response;
 import spring.restapp.model.Voto;
+import spring.restapp.response.Response;
 
 public interface VotoService {
 	

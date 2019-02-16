@@ -1,7 +1,7 @@
 package spring.restapp.service;
 
-import spring.restapp.Response.Response;
 import spring.restapp.model.SessaoVotacao;
+import spring.restapp.response.Response;
 
 public interface SessaoVotacaoService {
 

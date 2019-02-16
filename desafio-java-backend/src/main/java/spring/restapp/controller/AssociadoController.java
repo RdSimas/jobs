@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import spring.restapp.Response.Response;
 import spring.restapp.dto.PersistirAssociadoDTO;
 import spring.restapp.model.Associado;
+import spring.restapp.response.Response;
 import spring.restapp.service.AssociadoService;
 
 @RestController

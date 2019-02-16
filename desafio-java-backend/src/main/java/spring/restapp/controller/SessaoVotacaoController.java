@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import spring.restapp.Response.Response;
 import spring.restapp.dto.PersistirSessaoVotacaoDTO;
 import spring.restapp.model.SessaoVotacao;
+import spring.restapp.response.Response;
 import spring.restapp.service.SessaoVotacaoService;
 
 @RestController

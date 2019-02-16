@@ -19,7 +19,12 @@ public class PautaServiceImpl implements PautaService {
 	
 	@Override
 	public Boolean existePauta(Pauta pauta) {
-		return pautaRepository.existsById(pauta.getId());
+		return existePauta(pauta.getId());
+	}
+	
+	@Override
+	public Boolean existePauta(Long idPauta) {
+		return pautaRepository.existsById(idPauta);
 	}
 
 }

@@ -7,5 +7,7 @@ public interface PautaService {
 	Pauta persistirPauta(Pauta pauta);
 	
 	Boolean existePauta(Pauta pauta);
+	
+	Boolean existePauta(Long idPauta);
 
 }

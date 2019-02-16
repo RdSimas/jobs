@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import spring.restapp.Response.Response;
 import spring.restapp.dto.PersistirPautaDTO;
 import spring.restapp.model.Pauta;
+import spring.restapp.response.Response;
 import spring.restapp.service.PautaService;
 
 

@@ -3,9 +3,10 @@ package spring.restapp.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import spring.restapp.Response.Response;
+import spring.restapp.exception.PautaNaoEncontradaException;
 import spring.restapp.model.SessaoVotacao;
 import spring.restapp.repository.SessaoVotacaoRepository;
+import spring.restapp.response.Response;
 
 @Service
 public class SessaoVotacaoServiceImpl implements SessaoVotacaoService {
@@ -17,15 +18,13 @@ public class SessaoVotacaoServiceImpl implements SessaoVotacaoService {
 	private PautaService pautaService;
 
 	public Response<SessaoVotacao> persistirSessaoVotacao(SessaoVotacao sessaoVotacao) {
-		Response<SessaoVotacao> response = new Response<>();
-
-		if (pautaService.existePauta(sessaoVotacao.getPauta())) {
-			response.setData(sessaoVotacaoRepository.save(sessaoVotacao));
-		} else {
-			response.getErrors().add("Pauta informada não foi encontrada.");
+		if (!pautaService.existePauta(sessaoVotacao.getPauta())) {
+			throw new PautaNaoEncontradaException();
 		}
 
-		return response;
+		sessaoVotacao = sessaoVotacaoRepository.save(sessaoVotacao);
+
+		return new Response<>(sessaoVotacao);
 	}
 
 	@Override
