@@ -33,10 +33,7 @@ public class SessaoVotacaoController {
 			return ResponseEntity.badRequest().body(response);
 		}
 		
-		SessaoVotacao sessaoVotacao = sessaoVotacaoService.persistirSessaoVotacao(sessaoVotacaoDto.toSessaoVotacao());
-		response.setData(sessaoVotacao);
-		
-		return ResponseEntity.ok(response);
+		return ResponseEntity.ok(sessaoVotacaoService.persistirSessaoVotacao(sessaoVotacaoDto.toSessaoVotacao()));
 	}
 
 }

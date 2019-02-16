@@ -16,5 +16,10 @@ public class AssociadoServiceImpl implements AssociadoService{
 	public Associado persistirAssociado(Associado associado) {
 		return associadoRepository.save(associado);
 	}
+	
+	@Override
+	public Boolean existeAssociado(Associado associado) {
+		return associadoRepository.existsById(associado.getId());
+	}
 
 }

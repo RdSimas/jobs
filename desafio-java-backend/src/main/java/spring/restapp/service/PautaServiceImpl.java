@@ -16,5 +16,10 @@ public class PautaServiceImpl implements PautaService {
 	public Pauta persistirPauta(Pauta pauta) {
 		return pautaRepository.save(pauta);
 	}
+	
+	@Override
+	public Boolean existePauta(Pauta pauta) {
+		return pautaRepository.existsById(pauta.getId());
+	}
 
 }

@@ -5,5 +5,7 @@ import spring.restapp.model.Pauta;
 public interface PautaService {
 	
 	Pauta persistirPauta(Pauta pauta);
+	
+	Boolean existePauta(Pauta pauta);
 
 }
