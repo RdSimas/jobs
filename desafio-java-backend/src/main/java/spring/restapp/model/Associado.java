@@ -20,6 +20,9 @@ public class Associado implements Serializable {
 	@Column(name = "id_associado", nullable = false)
 	private Long id;
 	
+	@Column(name = "nome")
+	private String nome;
+	
 	@Column(name = "login")
 	private String login;
 	
@@ -39,6 +42,14 @@ public class Associado implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getLogin() {

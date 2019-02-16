@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import spring.restapp.dto.RecuperarVotoDTO;
 import spring.restapp.exception.AssociadoJaVotouException;
 import spring.restapp.exception.AssociadoNaoEncontradoException;
 import spring.restapp.exception.PautaNaoEncontradaException;
@@ -59,7 +60,8 @@ public class VotoServiceImpl implements VotoService {
 		}
 	}
 
-	public Response<List<Voto>> recuperarByPauta(Long idPauta) {
+	@Override
+	public Response<RecuperarVotoDTO> recuperarByPauta(Long idPauta) {
 
 		if (!pautaService.existePauta(idPauta)) {
 			throw new PautaNaoEncontradaException();
@@ -71,7 +73,7 @@ public class VotoServiceImpl implements VotoService {
 			throw new PautaSemVotosException();
 		}
 
-		return new Response<>(votos);
+		return new Response<>(new RecuperarVotoDTO(votos));
 	}
 
 	private Boolean existeVoto(Associado associado) {

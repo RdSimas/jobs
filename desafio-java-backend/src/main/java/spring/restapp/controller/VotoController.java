@@ -1,7 +1,5 @@
 package spring.restapp.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import spring.restapp.dto.PersistirVotoDTO;
+import spring.restapp.dto.RecuperarVotoDTO;
 import spring.restapp.model.Voto;
 import spring.restapp.response.Response;
 import spring.restapp.service.VotoService;
@@ -43,7 +42,7 @@ public class VotoController {
 
 	@ResponseBody
 	@GetMapping(value = "/recuperar/{idPauta}", produces = "application/json")
-	public ResponseEntity<Response<List<Voto>>> recuperarByPauta(@PathVariable("idPauta") Long idPauta) {
+	public ResponseEntity<Response<RecuperarVotoDTO>> recuperarByPauta(@PathVariable("idPauta") Long idPauta) {
 		return ResponseEntity.ok(votoService.recuperarByPauta(idPauta));
 	}
 

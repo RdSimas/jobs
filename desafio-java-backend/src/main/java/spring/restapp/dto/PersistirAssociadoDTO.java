@@ -7,15 +7,16 @@ import spring.restapp.security.utils.SenhaUtils;
 
 public class PersistirAssociadoDTO {
 
-	@NotEmpty(message = "Login não pode ser vazio.")
+	@NotEmpty(message = "Nome não pode ser vazio.")
+	private String nome;
 	private String login;
-	@NotEmpty(message = "Senha não pode ser vazio.")
 	private String senha;
-	
+
 	public Associado toAssociado() {
 		Associado associado = new Associado();
 		associado.setLogin(getLogin());
 		associado.setSenha(SenhaUtils.gerarBCrypt(getSenha()));
+		associado.setNome(getNome());
 		return associado;
 	}
 
@@ -35,4 +36,11 @@ public class PersistirAssociadoDTO {
 		this.senha = senha;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 }

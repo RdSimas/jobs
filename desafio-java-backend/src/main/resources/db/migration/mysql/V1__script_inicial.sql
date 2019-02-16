@@ -5,8 +5,9 @@ CREATE TABLE `votacao_app`.`pauta` (
   
   CREATE TABLE `votacao_app`.`associado` (
   `id_associado` INT NOT NULL AUTO_INCREMENT,
-  `login` VARCHAR(15) NOT NULL,
-  `senha` VARCHAR(150) NOT NULL,
+  `nome` VARCHAR(50) NOT NULL,
+  `login` VARCHAR(15),
+  `senha` VARCHAR(150),
   PRIMARY KEY (`id_associado`)) DEFAULT CHARSET=utf8;
   
   CREATE TABLE `votacao_app`.`voto` (
