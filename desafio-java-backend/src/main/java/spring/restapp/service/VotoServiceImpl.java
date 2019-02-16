@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import spring.restapp.exception.AssociadoJaVotouException;
 import spring.restapp.exception.AssociadoNaoEncontradoException;
 import spring.restapp.exception.PautaNaoEncontradaException;
 import spring.restapp.exception.PautaSemVotosException;
+import spring.restapp.exception.SessaoVotacaoIndisponivelException;
 import spring.restapp.exception.SessaoVotacaoNaoEncontradaException;
+import spring.restapp.model.Associado;
 import spring.restapp.model.Voto;
 import spring.restapp.repository.VotoRepository;
 import spring.restapp.response.Response;
@@ -31,6 +34,14 @@ public class VotoServiceImpl implements VotoService {
 
 	@Override
 	public Response<Voto> persistirVoto(Voto voto) {
+		validarPersistenciaDeVoto(voto);
+
+		voto = votoRepository.save(voto);
+
+		return new Response<>(voto);
+	}
+
+	private void validarPersistenciaDeVoto(Voto voto) {
 		if (!associadoService.existeAssociado(voto.getAssociado())) {
 			throw new AssociadoNaoEncontradoException();
 		}
@@ -39,9 +50,13 @@ public class VotoServiceImpl implements VotoService {
 			throw new SessaoVotacaoNaoEncontradaException();
 		}
 
-		voto = votoRepository.save(voto);
+		if (!sessaoVotacaoService.isSessaoAberta(voto.getSessao())) {
+			throw new SessaoVotacaoIndisponivelException();
+		}
 
-		return new Response<>(voto);
+		if (existeVoto(voto.getAssociado())) {
+			throw new AssociadoJaVotouException();
+		}
 	}
 
 	public Response<List<Voto>> recuperarByPauta(Long idPauta) {
@@ -57,6 +72,10 @@ public class VotoServiceImpl implements VotoService {
 		}
 
 		return new Response<>(votos);
+	}
+
+	private Boolean existeVoto(Associado associado) {
+		return votoRepository.existsByAssociado(associado);
 	}
 
 }

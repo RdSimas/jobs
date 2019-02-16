@@ -1,5 +1,7 @@
 package spring.restapp.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,12 @@ public class SessaoVotacaoServiceImpl implements SessaoVotacaoService {
 	@Override
 	public Boolean existeSessaoVotacao(SessaoVotacao sessaoVotacao) {
 		return sessaoVotacaoRepository.existsById(sessaoVotacao.getId());
+	}
+	
+	@Override
+	public Boolean isSessaoAberta(SessaoVotacao sessaoVotacao) {
+		Optional<SessaoVotacao> sessao = sessaoVotacaoRepository.findById(sessaoVotacao.getId());
+		return sessao.isPresent() && sessao.get().sessaoAberta();
 	}
 
 }

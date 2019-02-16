@@ -8,5 +8,7 @@ public interface SessaoVotacaoService {
 	Response<SessaoVotacao> persistirSessaoVotacao(SessaoVotacao sessaoVotacao);
 	
 	Boolean existeSessaoVotacao(SessaoVotacao sessaoVotacao);
+	
+	Boolean isSessaoAberta(SessaoVotacao sessaoVotacao);
 
 }

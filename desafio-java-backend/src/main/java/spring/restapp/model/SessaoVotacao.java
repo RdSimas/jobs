@@ -32,6 +32,16 @@ public class SessaoVotacao implements Serializable {
 
 	@Column(name = "fim")
 	private LocalDateTime fim;
+	
+	public Boolean sessaoAberta() {
+		if(getInicio() != null && getFim() != null) {
+			LocalDateTime now = LocalDateTime.now();
+			Boolean isInicioBeforeOrEqual = getInicio().isBefore(now) || getInicio().isEqual(now);
+			Boolean isFimAfterOrEqual = getFim().isAfter(now) || getFim().isEqual(now);
+			return isInicioBeforeOrEqual && isFimAfterOrEqual;
+		}
+		return Boolean.FALSE;
+	}
 
 	public SessaoVotacao() {
 	}
