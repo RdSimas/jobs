@@ -38,10 +38,20 @@ public class Voto implements Serializable {
     @ManyToOne
 	private SessaoVotacao sessao;
 
+	public Voto() {
+	}
+
+	public Voto(Long id, VotoEnum valor, Associado associado, SessaoVotacao sessao) {
+		this.id = id;
+		this.valor = valor;
+		this.associado = associado;
+		this.sessao = sessao;
+	}
+	
 	public Long getId() {
 		return id;
 	}
-
+	
 	public void setId(Long id) {
 		this.id = id;
 	}

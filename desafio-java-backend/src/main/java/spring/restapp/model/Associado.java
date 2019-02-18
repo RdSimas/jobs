@@ -36,6 +36,13 @@ public class Associado implements Serializable {
 		this.id = id;
 	}
 
+	public Associado(Long id, String nome, String login, String senha) {
+		this.id = id;
+		this.nome = nome;
+		this.login = login;
+		this.senha = senha;
+	}
+
 	public Long getId() {
 		return id;
 	}

@@ -30,6 +30,15 @@ public class Pauta implements Serializable {
 		this.id = id;
 	}
 
+	public Pauta(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Pauta(Long id, String descricao) {
+		this.id = id;
+		this.descricao = descricao;
+	}
+
 	public Long getId() {
 		return id;
 	}

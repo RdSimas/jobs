@@ -10,6 +10,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
 import spring.restapp.model.Voto;
 
@@ -33,6 +34,21 @@ public class VotoRepositoryImpl implements VotoRepositoryCustom {
 		cq.where(predicate);
 
 		return em.createQuery(cq).getResultList();
+	}
+	
+	
+	public Boolean existeVotoPorAssociadoNaPauta(Long idPauta, Long idAssociado) {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Voto> cq = cb.createQuery(Voto.class);
+
+		Root<Voto> book = cq.from(Voto.class);
+		
+		Predicate pautaPredicate = cb.equal(book.get("sessao").get("pauta").get("id"), idPauta);
+		Predicate associadoPredicate = cb.equal(book.get("associado").get("id"), idAssociado);
+
+		cq.where(pautaPredicate, associadoPredicate);
+		
+		return !CollectionUtils.isEmpty(em.createQuery(cq).getResultList());
 	}
 
 }

@@ -1,14 +1,13 @@
 package spring.restapp.service;
 
+import java.util.Optional;
+
 import spring.restapp.model.SessaoVotacao;
-import spring.restapp.response.Response;
 
 public interface SessaoVotacaoService {
 
-	Response<SessaoVotacao> persistirSessaoVotacao(SessaoVotacao sessaoVotacao);
+	SessaoVotacao persistirSessaoVotacao(SessaoVotacao sessaoVotacao);
 	
-	Boolean existeSessaoVotacao(SessaoVotacao sessaoVotacao);
-	
-	Boolean isSessaoAberta(SessaoVotacao sessaoVotacao);
+	Optional<SessaoVotacao> findById(Long idSessaoVotacao);
 
 }

@@ -1,6 +1,7 @@
 package spring.restapp.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,9 +15,10 @@ import spring.restapp.exception.PautaSemVotosException;
 import spring.restapp.exception.SessaoVotacaoIndisponivelException;
 import spring.restapp.exception.SessaoVotacaoNaoEncontradaException;
 import spring.restapp.model.Associado;
+import spring.restapp.model.Pauta;
+import spring.restapp.model.SessaoVotacao;
 import spring.restapp.model.Voto;
 import spring.restapp.repository.VotoRepository;
-import spring.restapp.response.Response;
 
 @Service
 public class VotoServiceImpl implements VotoService {
@@ -34,12 +36,9 @@ public class VotoServiceImpl implements VotoService {
 	private PautaService pautaService;
 
 	@Override
-	public Response<Voto> persistirVoto(Voto voto) {
+	public Voto persistirVoto(Voto voto) {
 		validarPersistenciaDeVoto(voto);
-
-		voto = votoRepository.save(voto);
-
-		return new Response<>(voto);
+		return votoRepository.save(voto);
 	}
 
 	private void validarPersistenciaDeVoto(Voto voto) {
@@ -47,21 +46,23 @@ public class VotoServiceImpl implements VotoService {
 			throw new AssociadoNaoEncontradoException();
 		}
 
-		if (!sessaoVotacaoService.existeSessaoVotacao(voto.getSessao())) {
+		Optional<SessaoVotacao> sessaoCarregada = sessaoVotacaoService.findById(voto.getSessao().getId());
+		
+		if (!sessaoCarregada.isPresent()) {
 			throw new SessaoVotacaoNaoEncontradaException();
 		}
-
-		if (!sessaoVotacaoService.isSessaoAberta(voto.getSessao())) {
+		
+		if (!sessaoCarregada.get().sessaoAberta()) {
 			throw new SessaoVotacaoIndisponivelException();
 		}
 
-		if (existeVoto(voto.getAssociado())) {
+		if (existeVoto(voto.getAssociado(), sessaoCarregada.get().getPauta())) {
 			throw new AssociadoJaVotouException();
 		}
 	}
 
 	@Override
-	public Response<RecuperarVotoDTO> recuperarByPauta(Long idPauta) {
+	public RecuperarVotoDTO recuperarByPauta(Long idPauta) {
 
 		if (!pautaService.existePauta(idPauta)) {
 			throw new PautaNaoEncontradaException();
@@ -73,11 +74,12 @@ public class VotoServiceImpl implements VotoService {
 			throw new PautaSemVotosException();
 		}
 
-		return new Response<>(new RecuperarVotoDTO(votos));
+		return new RecuperarVotoDTO(votos);
 	}
 
-	private Boolean existeVoto(Associado associado) {
-		return votoRepository.existsByAssociado(associado);
+	@Override
+	public Boolean existeVoto(Associado associado, Pauta pauta) {
+		return votoRepository.existeVotoPorAssociadoNaPauta(pauta.getId(), associado.getId());
 	}
 
 }

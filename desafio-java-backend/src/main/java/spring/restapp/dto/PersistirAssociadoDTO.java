@@ -2,14 +2,19 @@ package spring.restapp.dto;
 
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.validator.constraints.Length;
+
 import spring.restapp.model.Associado;
 import spring.restapp.security.utils.SenhaUtils;
 
 public class PersistirAssociadoDTO {
 
+	@Length(max = 50, message = "Nome deve ter no máximo 50 caracteres.")
 	@NotEmpty(message = "Nome não pode ser vazio.")
 	private String nome;
+	@Length(max = 15, message = "Login deve ter no máximo 15 caracteres.")
 	private String login;
+	@Length(max = 15, message = "Senha deve ter no máximo 15 caracteres.")
 	private String senha;
 
 	public Associado toAssociado() {

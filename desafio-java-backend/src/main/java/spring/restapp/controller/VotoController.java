@@ -37,13 +37,17 @@ public class VotoController {
 			return ResponseEntity.badRequest().body(response);
 		}
 
-		return ResponseEntity.ok(votoService.persistirVoto(votoDto.toVoto()));
+		Voto voto = votoService.persistirVoto(votoDto.toVoto());
+		response.setData(voto);
+		
+		return ResponseEntity.ok(response);
 	}
 
 	@ResponseBody
 	@GetMapping(value = "/recuperar/{idPauta}", produces = "application/json")
 	public ResponseEntity<Response<RecuperarVotoDTO>> recuperarByPauta(@PathVariable("idPauta") Long idPauta) {
-		return ResponseEntity.ok(votoService.recuperarByPauta(idPauta));
+		RecuperarVotoDTO recuperarVotoDto = votoService.recuperarByPauta(idPauta);
+		return ResponseEntity.ok(new Response<RecuperarVotoDTO>(recuperarVotoDto));
 	}
 
 }

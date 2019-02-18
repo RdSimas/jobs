@@ -33,6 +33,20 @@ public class SessaoVotacao implements Serializable {
 	@Column(name = "fim")
 	private LocalDateTime fim;
 	
+	public SessaoVotacao() {
+	}
+	
+	public SessaoVotacao(Long id) {
+		this.id = id;
+	}
+	
+	public SessaoVotacao(Long id, Pauta pauta, LocalDateTime inicio, LocalDateTime fim) {
+		this.id = id;
+		this.pauta = pauta;
+		this.inicio = inicio;
+		this.fim = fim;
+	}
+	
 	public Boolean sessaoAberta() {
 		if(getInicio() != null && getFim() != null) {
 			LocalDateTime now = LocalDateTime.now();
@@ -41,13 +55,6 @@ public class SessaoVotacao implements Serializable {
 			return isInicioBeforeOrEqual && isFimAfterOrEqual;
 		}
 		return Boolean.FALSE;
-	}
-
-	public SessaoVotacao() {
-	}
-
-	public SessaoVotacao(Long id) {
-		this.id = id;
 	}
 
 	public Long getId() {
