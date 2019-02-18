@@ -1,0 +1,29 @@
+Tecnologias Utilizadas:
+
+Spring Boot: Framework consolidado no mercado, de fácil configuração e alta produtividade. 
+Maven: Gerenciador de dependências.
+FlyWay: Gerenciamento de script sql, gerando maior controle de DDL e DML. Muito útil para trabalhar em equipes.
+MySql: Banco de dados relacional.
+Mockito: Útil para criação de dados utilizados nos testes.
+JUnit: Solução para testes com boa integração com Spring Boot.
+Swagger: Utilizado para criar documentaçãode forma clara e útil. Pode ser usado para criar requests.
+BCrypt: Utilizado para criptografia.
+
+Obs: Caso fosse necessário implementar solução de segurança eu utilizaria Json Web Token. 
+Fácil integração com SpringBoot e permite que a aplicação não guarde estado (stateless), usando boas práticas para uma aplicação RestFull.
+
+Obs 2: Podemos utilizar Docker para gerar uma imagem da aplicação. Facilitando a instalação em servidores que trabalham com conteinerização.
+
+Obs 3: Localmente eu fiz testes de stress com Apache AB, obtendo bons resultados.
+
+
+- As portas 3306 e 8080 devem estar liberadas para a aplicação funcionar.
+- Localmente foi utilizado o schema de nome: votacao_app. Credenciais do BD: root/admin.
+- Para testar a aplicação basta executar o JAR gerado pelo Maven.
+
+
+
+Espero que o fluxo principal, alternativo e de exceção sejam testados. Certificando o bom funcionamento do app.
+
+
+
